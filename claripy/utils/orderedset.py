@@ -15,6 +15,15 @@ class OrderedSet(collections.abc.MutableSet):
         if iterable is not None:
             self |= iterable
 
+    def __setstate__(self, state):
+        self.end = end = []
+        end += [None, end, end]
+        self.map = {}
+        self |= state
+
+    def __getstate__(self):
+        return list(self)
+
     def __len__(self):
         return len(self.map)
 
